@@ -8,27 +8,23 @@ const App = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const getAllProducts = useCallback(async () =>{
+  const getAllProducts = useCallback(async () => {
     setLoading(true);
     setError(null);
 
-    try{
+    try {
       const response = axios.get(API_URL);
       setProducts((await response).data);
       console.log(response);
-
-    }
-    catch(error){
-      if (error){
+    } catch (error) {
+      if (error) {
         setError("Failed to fetch products. Please try again.");
-        console.error(error)
+        console.error(error);
       }
-      
+    } finally {
+      setLoading(false);
     }
-    finally{
-        setLoading(false);
-      }
-  }, [API_URL])  
+  }, [API_URL]);
   useEffect(
     function () {
       getAllProducts();
@@ -38,15 +34,7 @@ const App = () => {
 
   return (
     <div>
-      <Home products={products} />
-      {error && <p className="text-red-500">{error}</p>}
-      <button
-        className="bg-emerald-900 p-5 m-10 text-white disabled:opacity-50"
-        onClick={getAllProducts}
-        disabled={loading}
-      >
-        {loading ? "Loading..." : "Get data"}
-      </button>
+      <Home/>
     </div>
   );
 };
