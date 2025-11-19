@@ -1,15 +1,13 @@
 import React, { useCallback, useEffect, useState } from "react";
-import Home from "./pages/Home";
 import axios from "axios";
 import Navbar from "./components/Navbar";
 import { Outlet } from "react-router-dom";
-import AppRoutes from "./pages/AppRoutes";
 
 const App = () => {
   const API_URL = import.meta.env.VITE_API_URL;
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [_products, setProducts] = useState([]);
+  const [_loading, setLoading] = useState(false);
+  const [_error, setError] = useState(null);
 
   const getAllProducts = useCallback(async () => {
     setLoading(true);
@@ -37,11 +35,8 @@ const App = () => {
 
   return (
     <div>
-        <div>
-        <Navbar />
-        <Outlet/>
-      </div>
-      <AppRoutes/>
+      <Navbar />
+      <Outlet />
     </div>
   );
 };
