@@ -2,10 +2,13 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import { LuShoppingCart } from "react-icons/lu";
 
-const Navbar = ({toggleCart}) => {
+const Navbar = ({ toggleCart }) => {
   // styles
   const linkBase =
     "px-4 py-2 rounded-md transition-all duration-200 inline-block transform";
+
+  const getNavLinkClass = ({ isActive }) =>
+    `${linkBase} ${isActive ? navActive : navInActive} `;
   // active: light/solid chip so it stands out on the glass
   const navActive = "bg-white/30 text-white scale-105";
   // inactive: white text on glass, subtle hover
@@ -25,20 +28,10 @@ const Navbar = ({toggleCart}) => {
           <nav>
             <ul className="flex items-center gap-6 text-md">
               <li>
-                <NavLink
-                  to="/"
-                  end
-                  className={({ isActive }) =>
-                    `${linkBase} ${
-                      isActive ? navActive : navInActive
-                    } `
-                  }
-                >
+                <NavLink to="/" end className={getNavLinkClass}>
                   <span className="relative">
                     Home
-                    <span
-                      className="absolute left-0 -bottom-1 h-0.5 bg-emerald-300 transition-all duration-200"
-                    />
+                    <span className="absolute left-0 -bottom-1 h-0.5 bg-emerald-300 transition-all duration-200" />
                   </span>
                 </NavLink>
               </li>
@@ -46,10 +39,7 @@ const Navbar = ({toggleCart}) => {
               <li>
                 <NavLink
                   to="/clothes"
-                  className={({ isActive }) =>
-                    `${linkBase} ${
-                      isActive ? navActive : navInActive
-                    }`
+                  className={getNavLinkClass
                   }
                 >
                   <span className="relative">
@@ -67,10 +57,7 @@ const Navbar = ({toggleCart}) => {
               <li>
                 <NavLink
                   to="/shoes"
-                  className={({ isActive }) =>
-                    `${linkBase} ${
-                      isActive ? navActive : navInActive
-                    }`
+                  className={getNavLinkClass
                   }
                 >
                   Shoes
@@ -80,10 +67,7 @@ const Navbar = ({toggleCart}) => {
               <li>
                 <NavLink
                   to="/electronics"
-                  className={({ isActive }) =>
-                    `${linkBase} ${
-                      isActive ? navActive : navInActive
-                    }`
+                  className={getNavLinkClass
                   }
                 >
                   Electronics
@@ -93,10 +77,7 @@ const Navbar = ({toggleCart}) => {
               <li>
                 <NavLink
                   to="/furniture"
-                  className={({ isActive }) =>
-                    `${linkBase} ${
-                      isActive ? navActive : navInActive
-                    }`
+                  className={getNavLinkClass
                   }
                 >
                   Furniture
@@ -111,10 +92,7 @@ const Navbar = ({toggleCart}) => {
               <li>
                 <NavLink
                   to="/about"
-                  className={({ isActive }) =>
-                    `${linkBase} ${
-                      isActive ? navActive : navInActive
-                    }`
+                  className={getNavLinkClass
                   }
                 >
                   About
@@ -124,10 +102,7 @@ const Navbar = ({toggleCart}) => {
               <li>
                 <NavLink
                   to="/contact"
-                  className={({ isActive }) =>
-                    `${linkBase} ${
-                      isActive ? navActive : navInActive
-                    } `
+                  className={getNavLinkClass
                   }
                 >
                   Contact
