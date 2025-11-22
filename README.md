@@ -1,6 +1,7 @@
 # React E-Commerce Store (Work in Progress)
 
 This project is a modern, responsive e-commerce store built with React. It features dynamic product listings, detailed product views, smooth animations, and seamless client-side routing. The store fetches data from a public API and displays curated top-selling products with real-time star ratings and discounts.
+<img width="1920" height="730" alt="image" src="https://github.com/user-attachments/assets/04d1de9c-43ed-444a-87e2-161cfa3069fb" />
 
 ---
 
@@ -96,6 +97,3 @@ Contributions are welcome! Feel free to open issues or submit pull requests to h
 
 This project is licensed under the MIT License.
 
----
-
-*If you want me to add screenshots, deployment instructions, or a roadmap, just let me know!*
