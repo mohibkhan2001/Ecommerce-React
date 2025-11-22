@@ -1,12 +1,15 @@
-import React from 'react'
-import Navbar from '../components/Header/Navbar'
+import React from "react";
+import Hero from "../components/Home Page/Hero";
+import Home_Category from "../components/Home Page/Home_Category";
 
-const Home = () => {
+const Home = (props) => {
+  console.log(props.title)
   return (
     <div>
-      <Navbar/>
+      <Hero/>
+      <Home_Category SectionTitle='Top Sellers'/>
     </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
