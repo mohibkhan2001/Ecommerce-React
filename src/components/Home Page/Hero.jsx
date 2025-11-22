@@ -21,7 +21,7 @@ const Hero = () => {
         </span>
 
         <h1 className="mt-2 text-4xl md:text-6xl font-bold text-white drop-shadow-lg">
-          Discover Your Style
+          Discover Your <span className="text-emerald-950">Style</span>
         </h1>
 
         <p className="mt-4 text-lg md:text-xl text-gray-200 max-w-xl">
