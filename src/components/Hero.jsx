@@ -1,5 +1,4 @@
 import React from "react";
-import { motion, useReducedMotion } from "framer-motion";
 import {
   womensClothing,
   mensClothing,
@@ -8,7 +7,6 @@ import {
   gamingItem,
 } from "../data/HeroImages";
 import { NavLink } from "react-router-dom";
-import { useSwappableItems } from "../hooks/useSwappableItems"; // import your new hook
 
 const initialItems = [
   {
@@ -44,11 +42,6 @@ const initialItems = [
 ];
 
 export default function Hero() {
-  const { items, isPausedRef } = useSwappableItems(initialItems, 1500);
-  const prefersReducedMotion = useReducedMotion();
-
-  const motionTransition = { type: "spring", stiffness: 400, damping: 40 };
-
   return (
     <section
       className="w-full max-h-screen h-screen grid grid-cols-6 grid-rows-5 gap-0 relative overflow-hidden"
@@ -78,7 +71,7 @@ export default function Hero() {
       </div>
 
       {items.map((item) => (
-        <motion.div
+        <div
           key={item.id}
           className={`${item.placement} overflow-hidden z-0`}
           layout
@@ -90,7 +83,7 @@ export default function Hero() {
             maxHeight: "100vh",
           }}
         >
-          <motion.img
+          <img
             src={item.src}
             alt={item.alt}
             draggable={false}
@@ -107,7 +100,7 @@ export default function Hero() {
               e.currentTarget.style.display = "block";
             }}
           />
-        </motion.div>
+        </div>
       ))}
     </section>
   );

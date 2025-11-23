@@ -1,14 +1,16 @@
 import React from "react";
 import Home_product_cards from "./Home_product_cards";
 import { useTopProducts } from "../../hooks/useTopProducts";
+import { FaArrowAltCircleRight } from "react-icons/fa";
 
-const Home_Category = ({ SectionTitle }) => {
+const Home_Category = ({ SectionTitle, ids }) => {
   const handleProductClick = (id) => {
     console.log("Clicked product ID:", id);
     // You can navigate or open modal here
   };
 
-  const { products = [], loading, error } = useTopProducts();
+  // pass ids through to the hook so each Home_Category can fetch a different set
+  const { products = [], loading, error } = useTopProducts(ids);
 
   if (loading) {
     return (
@@ -29,7 +31,11 @@ const Home_Category = ({ SectionTitle }) => {
   }
 
   return (
-    <div className="w-full select-none py-20 px-30 flex flex-col gap-14 bg-neutral-50 relative">
+    <div className="w-full select-none py-10 px-30 flex flex-col gap-14 bg-neutral-100 relative">
+      <button className="bg-emerald-950 px-4 py-2 rounded-full text-white absolute right-35 flex justify-center items-center gap-4 cursor-pointer hover:bg-emerald-900 transition-all">
+        <span>Shop now</span>
+        <FaArrowAltCircleRight />
+      </button>
       <div className="h-1/2 w-20 rounded-2xl bg-emerald-950 absolute -left-14"></div>
       <div className="h-1/2 w-20 rounded-2xl bg-emerald-950 absolute -right-14"></div>
       <h1 className="Heading text-5xl font-extrabold p-2 text-emerald-950  text-center">

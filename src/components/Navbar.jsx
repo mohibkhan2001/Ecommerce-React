@@ -21,7 +21,7 @@ const Navbar = ({ toggleCart }) => {
       <div className="w-full max-w-7xl px-6">
         <div
           className="pointer-events-auto flex items-center justify-between gap-6 
-                     rounded-xl px-6 bg-white/10 backdrop-blur-md border border-white/20 shadow-lg"
+                     rounded-xl px-6 bg-neutral-800/20 backdrop-blur-md border border-white/20 shadow-lg"
         >
           <h1 className="text-lg font-bold text-white">Ecommerce Store</h1>
 
@@ -37,11 +37,7 @@ const Navbar = ({ toggleCart }) => {
               </li>
 
               <li>
-                <NavLink
-                  to="/clothes"
-                  className={getNavLinkClass
-                  }
-                >
+                <NavLink to="/clothes" className={getNavLinkClass}>
                   <span className="relative">
                     Clothes
                     <span
@@ -55,31 +51,19 @@ const Navbar = ({ toggleCart }) => {
               </li>
 
               <li>
-                <NavLink
-                  to="/shoes"
-                  className={getNavLinkClass
-                  }
-                >
+                <NavLink to="/shoes" className={getNavLinkClass}>
                   Shoes
                 </NavLink>
               </li>
 
               <li>
-                <NavLink
-                  to="/electronics"
-                  className={getNavLinkClass
-                  }
-                >
+                <NavLink to="/electronics" className={getNavLinkClass}>
                   Electronics
                 </NavLink>
               </li>
 
               <li>
-                <NavLink
-                  to="/furniture"
-                  className={getNavLinkClass
-                  }
-                >
+                <NavLink to="/furniture" className={getNavLinkClass}>
                   Furniture
                 </NavLink>
               </li>
@@ -90,21 +74,13 @@ const Navbar = ({ toggleCart }) => {
               </li>
 
               <li>
-                <NavLink
-                  to="/about"
-                  className={getNavLinkClass
-                  }
-                >
+                <NavLink to="/about" className={getNavLinkClass}>
                   About
                 </NavLink>
               </li>
 
               <li>
-                <NavLink
-                  to="/contact"
-                  className={getNavLinkClass
-                  }
-                >
+                <NavLink to="/contact" className={getNavLinkClass}>
                   Contact
                 </NavLink>
               </li>
