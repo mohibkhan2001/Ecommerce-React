@@ -2,7 +2,6 @@ import React from "react";
 import { motion } from "framer-motion";
 import { FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa";
 import { CgShoppingCart } from "react-icons/cg";
-import placeholderImg from "../../../src/assets/Images/testProduct.png";
 
 /**
  * Home_product_cards
@@ -57,7 +56,7 @@ const Home_product_cards = ({ product = {}, index = 0, onClick  }) => {
 
   return (
     <motion.div
-      className="h-100 w-70 border border-gray-200 rounded-4xl shadow-lg px-6 py-4 relative bg-white hover:scale-105 transition-all cursor-pointer"
+      className="h-100 w-70 border border-gray-200 rounded-4xl shadow-lg px-6 py-4 relative bg-white  transition-all cursor-pointer"
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: false, amount: 0.25 }}
@@ -100,7 +99,7 @@ const Home_product_cards = ({ product = {}, index = 0, onClick  }) => {
           </h2>
 
           <button
-            className="text-emerald-950 border-emerald-950 border-2 text-2xl p-2 rounded-xl cursor-pointer hover:shadow"
+            className="text-emerald-950 border-emerald-950 border-2 text-2xl p-2 rounded-xl cursor-pointer hover:shadow hover:scale-110 transition-all"
             title="Add to cart"
             onClick={() => {
               console.log("Add to cart clicked for", product.id);
