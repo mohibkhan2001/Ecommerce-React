@@ -31,20 +31,19 @@ const Home_Category = ({ SectionTitle, ids }) => {
   }
 
   return (
-    <div className="w-full select-none py-10 px-30 flex flex-col gap-14 bg-neutral-100 relative">
+    <div className="w-full select-none py-20 px-20 flex flex-col gap-14 bg-red-100 relative">
       {SectionTitle !== "Top Sellers" && (
         <button className="bg-emerald-950 px-4 py-2 rounded-full text-white absolute right-8 flex justify-center items-center gap-4 cursor-pointer hover:bg-emerald-900 transition-all">
           <span>Shop now</span>
           <FaArrowAltCircleRight />
         </button>
       )}
-      <div className="h-1/2 w-20 rounded-2xl bg-emerald-950 absolute -left-14"></div>
-      <div className="h-1/2 w-20 rounded-2xl bg-emerald-950 absolute -right-14"></div>
+
       <h1 className="Heading text-5xl font-extrabold p-2 text-emerald-950  text-center">
         {SectionTitle}
       </h1>
 
-      <div className="flex gap-8 justify-around flex-wrap">
+      <div className="flex gap-4 justify-around items-center flex-wrap">
         {products.map((product, idx) => (
           <Home_product_cards
             key={product.id ?? idx}

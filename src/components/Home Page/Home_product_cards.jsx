@@ -1,17 +1,13 @@
 /* eslint-disable no-undef */
+import React from "react";
 // eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 import { FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa";
 import { CgShoppingCart } from "react-icons/cg";
 
-/**
- * Home_product_cards
- * Props:
- *  - product: {
- *      id, title, price, rating, images: [url,...], discountPercentage
- *    }
- */
-const Home_product_cards = ({ product = {}, index = 0, onClick  }) => {
+const placeholderImg = "https://via.placeholder.com/400x300?text=No+Image";
+
+const Home_product_cards = ({ product = {}, index = 0, onClick }) => {
   const {
     title = "Product",
     price = 0,
@@ -22,10 +18,8 @@ const Home_product_cards = ({ product = {}, index = 0, onClick  }) => {
 
   const imageSrc = images && images.length ? images[0] : placeholderImg;
 
-  // rating => array of icons (full, half, empty)
   const getStars = (ratingValue) => {
-    const cleanRating = Number(ratingValue.toFixed(1)); // avoid floating errors
-
+    const cleanRating = Number(Number(ratingValue || 0).toFixed(1));
     const stars = [];
     const full = Math.floor(cleanRating);
     const half = cleanRating - full >= 0.5;
@@ -33,22 +27,19 @@ const Home_product_cards = ({ product = {}, index = 0, onClick  }) => {
 
     for (let i = 0; i < full; i++) {
       stars.push(
-        <FaStar key={`full-${i}`} className="text-yellow-400 w-4 h-4" />
+        <FaStar key={`full-${i}`} className="text-yellow-400 w-3 h-3 md:w-4 md:h-4" />
       );
     }
-
     if (half && full < 5) {
       stars.push(
-        <FaStarHalfAlt key="half" className="text-yellow-400 w-4 h-4" />
+        <FaStarHalfAlt key="half" className="text-yellow-400 w-3 h-3 md:w-4 md:h-4" />
       );
     }
-
     for (let i = 0; i < empty; i++) {
       stars.push(
-        <FaRegStar key={`empty-${i}`} className="text-yellow-400 w-4 h-4" />
+        <FaRegStar key={`empty-${i}`} className="text-yellow-400 w-3 h-3 md:w-4 md:h-4" />
       );
     }
-
     return stars;
   };
 
@@ -57,54 +48,96 @@ const Home_product_cards = ({ product = {}, index = 0, onClick  }) => {
 
   return (
     <motion.div
-      className="h-100 w-70 border border-gray-200 rounded-4xl shadow-lg px-6 py-4 relative bg-white  transition-all "
-      initial={{ opacity: 0, y: 40 }}
+      // GPU hint + will-change to avoid compositor jank
+      className={
+        "w-full max-w-[16rem] p-4 rounded-2xl " +
+        "border border-gray-200 bg-white shadow-lg cursor-pointer transition-all relative " +
+        "md:w-70 md:h-100 md:px-6 md:py-4 md:rounded-4xl transform-gpu will-change-transform"
+      }
+      // only animate transform + opacity (cheap on compositor)
+      initial={{ opacity: 0, y: 18 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: false, amount: 0.25 }}
-      transition={{ duration: 0.5, ease: "easeOut", delay: index * 0.08 }}
-      onClick={onClick}
+      layout={false} // disable Framer layout animations
+      transition={{
+        duration: 0.36,
+        ease: "easeOut",
+        delay: Math.min(index * 0.04, 0.12),
+      }}
+      onClick={() => onClick && onClick(product)}
       role="button"
       tabIndex={0}
       onKeyPress={(e) => {
-        if (e.key === "Enter" || e.key === " ") onClick();
+        if ((e.key === "Enter" || e.key === " ") && onClick) onClick(product);
+      }}
+      // small inline style to help a few mobile browsers with flicker
+      style={{
+        // ensure the browser knows this element will transform; small 3D hint
+        transform: "translateZ(0)",
+        // hide backface to reduce flicker when compositing
+        WebkitBackfaceVisibility: "hidden",
+        backfaceVisibility: "hidden",
       }}
     >
-      <div className="w-full h-[60%] flex justify-center items-center relative overflow-hidden rounded-2xl">
+      {/* IMPORTANT: use aspect-* to reserve space and prevent layout shift */}
+      <div className="w-full relative overflow-hidden rounded-2xl flex items-center justify-center bg-gray-200  md:aspect-auto">
         <img
           src={imageSrc}
           alt={title}
-          className="h-full object-cover max-h-56"
+          // keep object-cover, but reserve space with aspect container
+          className="w-full h-full object-cover"
+          loading="lazy"
+          // if you have natural width/height values you can add width/height attributes for even less shift
         />
 
         {discountPercentage !== null && (
-          <span className="text-white bg-emerald-800 rounded-full font-semibold w-10 h-10 flex justify-center items-center p-2 absolute right-2 top-2 text-xs">
+          <span
+            className={
+              "absolute right-0 top-0 text-xs text-white bg-emerald-800 rounded-full font-medium flex items-center justify-center " +
+              "w-8 h-8 md:w-10 md:h-10 md:text-xs md:top-2 md:right-2"
+            }
+          >
             {Math.round(discountPercentage)}%
           </span>
         )}
       </div>
 
-      <div className="flex flex-col gap-4 mt-4">
-        <div className="flex flex-col gap-2">
-          <h2 className="font-semibold text-gray-700 truncate">{title}</h2>
+      <div className="flex flex-col gap-3 mt-3">
+        <div className="flex flex-col gap-1">
+          <h2 className="font-semibold text-gray-700 truncate text-sm md:text-base">
+            {title}
+          </h2>
+
           <span className="flex gap-1 items-center text-gray-700">
             {getStars(rating)}
-            <span className="text-sm text-gray-500 ml-2">
+            <span className="text-xs md:text-sm text-gray-500 ml-2">
               ({rating?.toFixed?.(1) ?? rating})
             </span>
           </span>
         </div>
 
-        <div className="flex justify-between items-center">
-          <h2 className="text-white font-bold text-2xl bg-emerald-950 px-4 py-2 rounded-full">
+        <div className="flex justify-between items-center mt-1">
+          <h2
+            className={
+              "text-white font-bold text-xs bg-emerald-950 px-2 py-1 rounded-full " +
+              "md:text-2xl md:px-4 md:py-2"
+            }
+          >
             {formatPrice(price)}
           </h2>
 
           <button
-            className="text-emerald-950 border-emerald-950 border-2 text-2xl p-2 rounded-xl cursor-pointer hover:shadow hover:scale-110 transition-all"
+            className={
+              "text-emerald-950 border-emerald-950 border-2 rounded-lg " +
+              "text-sm p-1 hover:shadow hover:scale-110 transition-all " +
+              "md:text-2xl md:p-2"
+            }
             title="Add to cart"
-            onClick={() => {
+            onClick={(e) => {
+              e.stopPropagation();
               console.log("Add to cart clicked for", product.id);
             }}
+            aria-label={`Add ${title} to cart`}
           >
             <CgShoppingCart />
           </button>
