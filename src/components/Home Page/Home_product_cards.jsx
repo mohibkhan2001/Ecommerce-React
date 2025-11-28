@@ -16,14 +16,7 @@ const Home_product_cards = ({ product = {}, index = 0, onClick }) => {
     discountPercentage = null,
   } = product;
 
-  // Optimize image URL for faster loading (reduce size & quality for thumbnails)
-  const optimizeImageUrl = (url) => {
-    if (!url) return placeholderImg;
-    // Remove existing query params and add compression
-    return url.replace(/\?.*$/, '') + '?w=300&q=75&auto=format';
-  };
-
-  const imageSrc = images && images.length ? optimizeImageUrl(images[0]) : placeholderImg;
+  const imageSrc = images && images.length ? images[0] : placeholderImg;
 
   const getStars = (ratingValue) => {
     const cleanRating = Number(Number(ratingValue || 0).toFixed(1));
@@ -87,18 +80,14 @@ const Home_product_cards = ({ product = {}, index = 0, onClick }) => {
       }}
     >
       {/* IMPORTANT: use aspect-* to reserve space and prevent layout shift */}
-      <div className="w-full relative overflow-hidden rounded-2xl flex items-center justify-center bg-gray-100 aspect-square md:aspect-auto">
+      <div className="w-full relative overflow-hidden rounded-2xl flex items-center justify-center bg-gray-200  md:aspect-auto">
         <img
           src={imageSrc}
           alt={title}
-          className="w-full h-full object-cover will-change-auto transition-opacity duration-300"
+          // keep object-cover, but reserve space with aspect container
+          className="w-full h-full object-cover"
           loading="lazy"
-          decoding="async"
-          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-          fetchPriority="low"
-          onError={(e) => {
-            e.target.src = placeholderImg;
-          }}
+          // if you have natural width/height values you can add width/height attributes for even less shift
         />
 
         {discountPercentage !== null && (
