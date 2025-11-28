@@ -1,7 +1,10 @@
 # React E-Commerce Store (Work in Progress)
+https://novamart-alpha.vercela.app
 
 This project is a modern, responsive e-commerce store built with React. It features dynamic product listings, detailed product views, smooth animations, and seamless client-side routing. The store fetches data from a public API and displays curated top-selling products with real-time star ratings and discounts.
-<img width="1920" height="730" alt="image" src="https://github.com/user-attachments/assets/04d1de9c-43ed-444a-87e2-161cfa3069fb" />
+<img width="1920" height="923" alt="image" src="https://github.com/user-attachments/assets/2a53e545-e96f-4cbf-8930-d4a1c39a0b6b" />
+<img width="1919" height="922" alt="image" src="https://github.com/user-attachments/assets/42a4190f-2a52-4727-a68e-07fd4c0040f1" />
+
 
 ---
 
